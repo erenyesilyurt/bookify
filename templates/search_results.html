@@ -1,0 +1,22 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Results for {{query}}{% endblock %}
+
+{% block pageDescription -%}
+Search results for {{ query }}
+{%- endblock %}
+
+{% block content %}
+
+{% if books %}
+    <h3 class="text-secondary text-center my-3">{{books|length}} results found.</h3>
+        <ul class="ml-3">
+{% for book in books %}
+            <li><a href="{{ url_for('book', isbn=book.isbn) }}">{{book.title}}</a></li>
+{% endfor %}
+        </ul>
+{% else %}
+    <h4 class="text-secondary text-center my-3">No results found for {{query}}.</h4>
+{% endif %}
+
+{% endblock %}

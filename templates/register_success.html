@@ -1,0 +1,11 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Success{% endblock %}
+
+{% block content %}
+<div class="text-center mt-3">
+    <h2 class="text-success">Register successful!</h2>
+    <p class="lead">Welcome to Bookify, {{ username }}!</p>
+    <p><a href="{{ url_for('login') }}">Click here</a> to go to our login page and start browsing Bookify immediately!</p>
+</div>
+{% endblock %}

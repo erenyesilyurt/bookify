@@ -1,0 +1,54 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block pageDescription -%}
+Bookify - the most popular website for book reviews with over 43276552342317902 users registered worldwide.
+{%- endblock %}
+
+{% block content %}
+
+<div class="container my-3">
+    <div class="row">
+        <div class="offset-md-1 offset-lg-3"></div>
+        <div class="col-12 col-md-10 col-lg-6">
+            <p class="text-primary h4 text-center">Welcome to Bookify, {{username}}!</p>
+            <p class="text-secondary text-center">Use the form below to find and rate your favourite books.</p>
+            <form action="{{ url_for('search') }}" method="GET" class="pt-2">
+                <div class="form-group row">
+                    <label for="inputQuery" class= "col-sm-2 col-form-label">Book</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputQuery" placeholder="Type a book" name="q" required>
+                    </div>
+                </div>
+                <fieldset class="form-group">
+                    <div class="row">
+                        <legend class="col-form-label col-sm-2 pt-0">Find by</legend>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="inputRadio1" name="findBy" value="title" checked>
+                                <label for="inputRadio1" class="form-check-label">Book title</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="inputRadio2" name="findBy" value="isbn">
+                                <label for="inputRadio2" class="form-check-label">ISBN</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="inputRadio3" name="findBy" value="author">
+                                <label for="inputRadio3" class="form-check-label">Author</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group row justify-content-center">
+                    <div class="col-sm-6 mt-3">
+                        <button type="submit" class="btn btn-primary btn-sm btn-block">Find books</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="offset-md-1 offset-lg-3"></div>
+    </div>
+</div>
+
+{% endblock %}

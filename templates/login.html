@@ -1,0 +1,37 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Sign in{% endblock %}
+
+{% block pageDescription %}
+Sign in to your account and see all your favorite books.
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-5 mt-3">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="inputUsername">Username</label>
+                    <input type="text" class="form-control" id="inputUsername" placeholder="Your username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Your password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign in</button>
+                {% if err_user_not_found or err_password_incorrect %}
+                <div class="alert alert-danger mt-2" role="alert">
+                    Failed to login. Please check your username and password and try again.
+                </div>
+                {% endif %}
+                <small class="form-text">Don't have an account yet? <a href="{{ url_for('register') }}">Click here</a> to sign up for free!</small>
+            </form>
+        </div>
+        <div class="col-12 col-md-7 my-2">
+            <img src="/static/res/booksplash.jpg" class="img-fluid mt-2">
+        </div>
+    </div>
+</div>
+
+{% endblock %}

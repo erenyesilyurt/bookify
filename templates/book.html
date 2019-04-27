@@ -1,0 +1,62 @@
+{% extends "layout/base.html" %}
+
+{% block title %}{{book.title}}{% endblock %}
+
+{% block pageDescription -%}
+User reviews and other information about {{ book.title }}by {{ book.author}}.
+{%- endblock %}
+
+{% block content %}
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-4">
+            <dl>
+                <dt>ISBN</dt>
+                <dd>{{ book.isbn }}</dd>
+
+                <dt>Title</dt>
+                <dd>{{ book.title }}</dd>
+
+                <dt>Author</dt>
+                <dd>{{ book.author }}</dd>
+
+                <dt>Publication Year</dt>
+                <dd>{{ book.year }}</dd>
+            </dl>
+            <p class="h5 text-secondary">Goodreads Info</p>
+            <dl>
+                <dt>Average Rating</dt>
+                <dd>{{ goodreads_data['books'][0]['average_rating'] }}</dd>
+
+                <dt>Number of Ratings</dt>
+                <dd>{{ goodreads_data['books'][0].work_ratings_count }}</dd>
+            </dl>
+        </div>
+        <div class="col-md-8">
+            <h4 class="text-primary">User Reviews</h4>
+            {% if book.reviews -%}
+            {% for review in book.reviews -%}
+            <p class="mb-0 mt-1">{{review.text}}</p>
+            <footer class="blockquote-footer">{{ review.reviewer.username }} rated this book {{ review.rating }}</footer>
+            {%- endfor %}
+            {% else %}
+            <p class="mt-1">No user reviews found for this book.</p>
+            {%- endif %}
+            <form class="mt-2" action="{{ url_for('submit_review', isbn=book.isbn) }}" method="POST">
+                <div class="form-group">
+                    <textarea class="form-control" rows="3" name="text" placeholder="Your review for this book" required></textarea>
+                </div>
+                {% for i in range(1, 6) %}
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" name="rating" id="rd{{i}}" value="{{i}}" required>
+                    <label for="rd{{i}}" class="form-check-label">{{i}}</label>
+                </div>
+                {% endfor %}
+                <div class="form-group mt-1">
+                    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

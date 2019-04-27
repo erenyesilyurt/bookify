@@ -1,0 +1,17 @@
+{% extends "layout/base.html" %}
+
+{% block title -%}
+{% if success -%}Success!{% else %}Failure{%- endif %}
+{%- endblock %}
+
+{% block content %}
+<div class="text-center mt-3">
+    {% if success %}
+    <h2 class="text-success">{{result}}</h2>
+    {% else %}
+    <h2 class="text-danger">{{result}}</h2>
+    {% endif %}
+    <p class="lead">{{result_message}}</p>
+    <p><a href="{{result_backlink}}">Click here</a> to go back.</p>
+</div>
+{% endblock %}
